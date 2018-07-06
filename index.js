@@ -1,9 +1,9 @@
 const fetch = require('electron-fetch')
 const electron = require('electron')
-const glob = require('glob-electron')
+//const glob = require('glob-electron')
 var WebTorrent = require('webtorrent')
 
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain} = electron
   
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -68,15 +68,19 @@ const {app, BrowserWindow, ipcMain} = require('electron')
     client.add(magnetURI, { path: '.' }, function (torrent) {
       
       torrent.on('done', function () {
-        console.log('torrent download finished')
-        
-        
+        //console.log('torrent download finished')
+        mainWindow.webContents.executeJavaScript(
+          "document.getElementById('text').style.display = 'block'"
+        )
+        mainWindow.webContents.executeJavaScript(
+          "document.getElementById('button').style.display = 'block'"
+        )
       })
     }).on('metadata', function () {
-      console.log('Metadata received')
+      //console.log('Metadata received')
     }).on('ready', function () {
       var torrent = client.get(AW_FADED)
-      console.log(torrent.magnetURI)
+      //console.log(torrent.magnetURI)
         torrent.files.forEach( file => {
           //console.log(file.path)
           
@@ -85,8 +89,4 @@ const {app, BrowserWindow, ipcMain} = require('electron')
           })
         })
       })
-      
-    }
-    function send ( path ) {
-      //mainWindow.ipcRederer.send('video:create', path)
     }

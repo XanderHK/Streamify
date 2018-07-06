@@ -8,19 +8,15 @@
       <h1>Hello World!</h1>
       <br />
       <script>
-        const { ipcRederer: ipc } = require('electron')
-        console.log(ipc)
+        const ipcRenderer = require('electron').ipcRenderer
 
-        ipc.on('video:create', function (event, arg) {
-          document.write('<b>' + arg + '</b>')
-          /*var video = docuent.createElement('video')
-          video.src = arg
-          video.width = '400'
-          document.appendChild(video)*/
+        ipcRenderer.on('video:create', function (event, arg) {
+          document.write("<video width=400 src='" + arg + "' type='audio/mp3' controls></video>")
+          
         })
-        document.write('<button id="button">Click me!</button>')
-        //document.getElementById('button').onclick = function () { ipc.send('video:create') }
+        document.write('<p id="text"hidden>Downloaded!</p>')
+        document.write('<button id="button" hidden>Click to play!</button>')
+        var button = document.getElementById('button').onclick = function () { ipcRenderer.send('video:create') }
       </script>
-      <video width=400 src='./01 Alone.mp3' type='audio/mp3' controls></video>
     </body>
   </html>
