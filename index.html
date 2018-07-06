@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Hello World!</title>
+    </head>
+    <body>
+      <h1>Hello World!</h1>
+      <br />
+      <script>
+        const { ipcRederer: ipc } = require('electron')
+        console.log(ipc)
+
+        ipc.on('video:create', function (event, arg) {
+          document.write('<b>' + arg + '</b>')
+          /*var video = docuent.createElement('video')
+          video.src = arg
+          video.width = '400'
+          document.appendChild(video)*/
+        })
+        document.write('<button id="button">Click me!</button>')
+        //document.getElementById('button').onclick = function () { ipc.send('video:create') }
+      </script>
+      <video width=400 src='./01 Alone.mp3' type='audio/mp3' controls></video>
+    </body>
+  </html>
