@@ -65,7 +65,7 @@ const {app, BrowserWindow, ipcMain} = electron
     magnetURI = AW_FADED //json.torrents.en['720p'].url
     //console.log(magnetURI)
 
-    client.add(magnetURI, { path: '.' }, function (torrent) {
+    client.add(magnetURI, { path: './downloads' }, function (torrent) {
       
       torrent.on('done', function () {
         //console.log('torrent download finished')
@@ -85,7 +85,7 @@ const {app, BrowserWindow, ipcMain} = electron
           //console.log(file.path)
           
           ipcMain.on('video:create', (event) => {
-            mainWindow.webContents.send('video:create', file.path)
+            mainWindow.webContents.send('video:create', './downloads/' + file.path)
           })
         })
       })
