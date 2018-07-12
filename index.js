@@ -81,12 +81,11 @@ const {app, BrowserWindow, ipcMain} = electron
     }).on('ready', function () {
       var torrent = client.get(AW_FADED)
       //console.log(torrent.magnetURI)
-        torrent.files.forEach( file => {
-          //console.log(file.path)
-          
-          ipcMain.on('video:create', (event) => {
-            mainWindow.webContents.send('video:create', './downloads/' + file.path)
-          })
+      torrent.files.forEach( file => {
+        //console.log(file.path)
+        ipcMain.on('video:create', (event) => {
+          mainWindow.webContents.send('video:create', './downloads/' + file.path)
         })
       })
-    }
+    })
+  }
